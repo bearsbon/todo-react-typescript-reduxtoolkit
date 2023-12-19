@@ -12,8 +12,9 @@ npm run dev
 ===
 React, Typescript, Redux Toolkit, Nodejs, Express, Mongoose, Eslint, Prettier 
 
-Как работает
+Описание
 ===
+Написал приложение без cra.
 Приложение работает на 8080 порту по адресу [http://localhost:8080/](http://localhost:8080/).
 Бэк работает на 5000 порту.
 
