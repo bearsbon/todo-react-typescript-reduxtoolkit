@@ -1,4 +1,4 @@
-import React, { FC, ChangeEvent, useState, useEffect } from "react";
+import React, { FC, ChangeEvent, useState, useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
 import {
@@ -7,8 +7,10 @@ import {
   updateSelectedTodo,
   addTodoThunk,
 } from "./redux/todoThunks";
+
 import TodoTask from "./Components/TodoTask";
 import { ITask } from "./Interfaces";
+import useDebounce from "./hooks/useDebounce";
 import "./styles/App.css";
 
 const App: FC = () => {
@@ -23,6 +25,8 @@ const App: FC = () => {
     dispatch(fetchAllTodos());
     setIsLoading(false);
   }, []);
+
+  const Task = memo(TodoTask);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setTask(event.target.value);
@@ -58,8 +62,7 @@ const App: FC = () => {
             type="text"
             placeholder="Task..."
             name="task"
-            value={task}
-            onChange={handleChange}
+            onChange={useDebounce(handleChange, 500)}
             onKeyUp={(e) => {
               e.key === "Enter" ? addTask() : null;
             }}
@@ -73,7 +76,7 @@ const App: FC = () => {
         <div className="todoList">
           {todoList.map((task: ITask, key: number) => {
             return (
-              <TodoTask
+              <Task
                 key={key}
                 task={task}
                 completeTask={completeTask}
