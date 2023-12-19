@@ -9,11 +9,12 @@ import {
 } from "./redux/todoThunks";
 import TodoTask from "./Components/TodoTask";
 import { ITask } from "./Interfaces";
-import "./App.css";
+import "./styles/App.css";
 
 const App: FC = () => {
   const [task, setTask] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const dispatch: AppDispatch = useDispatch();
   const todoList = useSelector((state: RootState) => state.todo.todoList);
 
@@ -32,7 +33,11 @@ const App: FC = () => {
       alert("Поле не может быть пустым");
       return;
     }
-    const newTask = { id: todoList.length + 1, taskName: task, done: false };
+    const newTask: ITask = {
+      id: todoList.length + 1,
+      taskName: task,
+      done: false,
+    };
     dispatch(addTodoThunk(newTask));
     setTask("");
   };
@@ -55,6 +60,9 @@ const App: FC = () => {
             name="task"
             value={task}
             onChange={handleChange}
+            onKeyUp={(e) => {
+              e.key === "Enter" ? addTask() : null;
+            }}
           />
         </div>
         <button onClick={addTask}>Add Task</button>

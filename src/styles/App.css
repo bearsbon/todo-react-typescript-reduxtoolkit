@@ -16,6 +16,7 @@ body {
   margin: 0%;
   padding: 0%;
   background-color: rgba(230, 230, 230, 0.933);
+  overflow-x: hidden;
 }
 
 input[type="checkbox"] {
@@ -23,7 +24,7 @@ input[type="checkbox"] {
 }
 
 .header {
-  flex: 30%;
+  margin-top: 50px;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -51,6 +52,17 @@ input[type="checkbox"] {
   border-radius: 10px;
   padding-left: 10px;
   cursor: pointer;
+  border: 0;
+  transition: 0.2s;
+  background-color: rgb(164, 220, 164);
+}
+
+.header button:hover {
+  transform: scale(1.05);
+}
+
+.header button:active {
+  transform: scale(0.95);
 }
 
 .todoList {
@@ -64,7 +76,7 @@ input[type="checkbox"] {
 
 .task {
   width: 500px;
-  height: 50px;
+  height: 40px;
   display: flex;
   color: #333;
   margin: 15px;
@@ -94,11 +106,16 @@ input[type="checkbox"] {
   flex: 20%;
   height: 100%;
   border: none;
-  background-color: gray;
+  background-color: rgb(153, 190, 153);
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
   color: white;
   cursor: pointer;
+  transition: 0.2s;
+}
+
+.task button:hover {
+  background-color: rgb(141, 170, 141);
 }
 
 .isDone {
