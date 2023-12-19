@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --ext=.jsx,.js,.tsx,.ts  .",
     "frontend": "webpack serve --mode development",
     "backend": "nodemon server.js",
     "dev": "concurrently \"npm run backend\" \"npm run frontend\""
@@ -41,6 +42,7 @@
     "eslint-plugin-n": "^16.4.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.33.2",
+    "eslint-webpack-plugin": "^4.0.1",
     "express": "^4.18.2",
     "html-webpack-plugin": "^5.5.4",
     "mongoose": "^8.0.3",
@@ -54,3 +56,4 @@
     "webpack-dev-server": "^4.15.1"
   }
 }
+

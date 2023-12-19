@@ -1,6 +1,5 @@
 import React, { FC, ChangeEvent, useState, useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "./redux/store";
 import {
   fetchAllTodos,
   deleteSelectedTodo,
@@ -8,8 +7,10 @@ import {
   addTodoThunk,
 } from "./redux/todoThunks";
 
-import TodoTask from "./Components/TodoTask";
+import { AppDispatch, RootState } from "./redux/store";
 import { ITask } from "./Interfaces";
+
+import TodoTask from "./Components/TodoTask";
 import "./styles/App.css";
 
 const App: FC = () => {

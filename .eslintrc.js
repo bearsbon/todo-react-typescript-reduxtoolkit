@@ -9,7 +9,7 @@ module.exports = {
       env: {
         node: true,
       },
-      files: [".eslintrc.{js,cjs}"],
+      files: [".eslintrc.{js,cjs,jsx,tsx}"],
       parserOptions: {
         sourceType: "script",
       },
@@ -19,6 +19,12 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["react"],
-  rules: {},
+  plugins: ["react", "@typescript-eslint"],
+  rules: {
+    "max-len": [1, 80, 2, { ignoreComments: true }],
+    "react/jsx-filename-extension": [
+      1,
+      { extensions: [".js", ".jsx", ".tsx", ".ts"] },
+    ],
+  },
 };
