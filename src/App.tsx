@@ -10,7 +10,6 @@ import {
 
 import TodoTask from "./Components/TodoTask";
 import { ITask } from "./Interfaces";
-import useDebounce from "./hooks/useDebounce";
 import "./styles/App.css";
 
 const App: FC = () => {
@@ -38,7 +37,7 @@ const App: FC = () => {
       return;
     }
     const newTask: ITask = {
-      id: todoList.length + 1,
+      id: todoList.length + Math.random(),
       taskName: task,
       done: false,
     };
@@ -62,7 +61,8 @@ const App: FC = () => {
             type="text"
             placeholder="Task..."
             name="task"
-            onChange={useDebounce(handleChange, 500)}
+            value={task}
+            onChange={handleChange}
             onKeyUp={(e) => {
               e.key === "Enter" ? addTask() : null;
             }}

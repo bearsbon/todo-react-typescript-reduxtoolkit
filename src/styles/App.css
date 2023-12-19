@@ -118,6 +118,10 @@ input[type="checkbox"] {
   background-color: rgb(141, 170, 141);
 }
 
+.task button:active {
+  background-color: rgb(131, 154, 131);
+}
+
 .isDone {
   text-decoration: line-through;
 }
