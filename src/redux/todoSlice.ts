@@ -1,13 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ITask } from "../Interfaces";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import {
+  fetchAllTodos,
+  deleteSelectedTodo,
+  updateSelectedTodo,
+  addTodoThunk,
+} from "./todoThunks";
 
 interface InitialState {
   todoList: Array<ITask>;
 }
 
 const initialState: InitialState = {
-  todoList: [{ id: 1, taskName: "Пример", done: false }],
+  todoList: [],
 };
 
 export const todoSlice = createSlice({
@@ -17,13 +22,28 @@ export const todoSlice = createSlice({
     addTodo: (state, action) => {
       state.todoList.push(action.payload);
     },
-    setDone: (state, action) => {
-      const item: ITask = state.todoList.find((el) => action.payload == el.id);
-      item.done = !item.done;
+    setDone: (state, action: PayloadAction<number>) => {
+      const item = state.todoList.find((el) => action.payload == el.id);
+      item!.done = !item!.done;
     },
     deleteTodo: (state, action) => {
       state.todoList = state.todoList.filter((el) => el.id != action.payload);
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchAllTodos.fulfilled, (state, action) => {
+      state.todoList = action.payload;
+    });
+    builder.addCase(deleteSelectedTodo.fulfilled, (state, action) => {
+      state.todoList = state.todoList.filter((el) => el._id !== action.payload);
+    });
+    builder.addCase(updateSelectedTodo.fulfilled, (state, action) => {
+      const todo = state.todoList.find((el) => el._id === action.payload);
+      todo!.done = !todo!.done;
+    });
+    builder.addCase(addTodoThunk.fulfilled, (state, action) => {
+      state.todoList.push(action.payload);
+    });
   },
 });
 

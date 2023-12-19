@@ -3,8 +3,8 @@ import { ITask } from "../Interfaces";
 
 interface Props {
   task: ITask;
-  completeTask(id: number): void;
-  deleteTask(id: number): void;
+  completeTask(id: string, isDone: boolean): void;
+  deleteTask(id: string): void;
 }
 
 const TodoTask = ({ task, completeTask, deleteTask }: Props) => {
@@ -15,13 +15,13 @@ const TodoTask = ({ task, completeTask, deleteTask }: Props) => {
           type="checkbox"
           name="done"
           checked={task.done}
-          onClick={() => completeTask(task.id)}
+          onChange={() => completeTask(task._id!, task.done)}
         />
         <span className={task.done ? "isDone" : ""}>{task.taskName}</span>
       </div>
       <button
         onClick={() => {
-          deleteTask(task.id);
+          deleteTask(task._id!);
         }}
       >
         X
