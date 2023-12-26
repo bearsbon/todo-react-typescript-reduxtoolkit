@@ -1,13 +1,19 @@
-import React, { FC, ChangeEvent, useState, useEffect, memo } from "react";
+import React, {
+  FC,
+  ChangeEvent,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllTodos,
   deleteSelectedTodo,
   updateSelectedTodo,
   addTodoThunk,
-} from "./redux/todoThunks";
+} from "./redux/todo/todoThunks";
 
-import { AppDispatch, RootState } from "./redux/store";
+import { AppDispatch, RootState } from "./redux/store/store";
 import { ITask } from "./Interfaces";
 
 import TodoTask from "./Components/TodoTask";
@@ -26,7 +32,7 @@ const App: FC = () => {
     setIsLoading(false);
   }, []);
 
-  const Task = memo(TodoTask);
+  console.log("App rerender");
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setTask(event.target.value);
@@ -46,13 +52,16 @@ const App: FC = () => {
     setTask("");
   };
 
-  const completeTask = (id: string, isDone: boolean): void => {
-    dispatch(updateSelectedTodo({ id: id, done: isDone }));
-  };
+  const completeTask = useCallback(
+    (id: string, isDone: boolean): void => {
+      dispatch(updateSelectedTodo({ id: id, done: isDone }));
+    },
+    [updateSelectedTodo]
+  );
 
-  const deleteTask = (id: string): void => {
+  const deleteTask = useCallback((id: string): void => {
     dispatch(deleteSelectedTodo(id));
-  };
+  }, []);
 
   return (
     <div className="App">
@@ -75,10 +84,10 @@ const App: FC = () => {
         <div>Загружаю таски...</div>
       ) : (
         <div className="todoList">
-          {todoList.map((task: ITask, key: number) => {
+          {todoList.map((task: ITask) => {
             return (
-              <Task
-                key={key}
+              <TodoTask
+                key={task.id}
                 task={task}
                 completeTask={completeTask}
                 deleteTask={deleteTask}

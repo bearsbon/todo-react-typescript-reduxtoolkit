@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ITask } from "../Interfaces";
+import { ITask } from "../../Interfaces";
 import {
   fetchAllTodos,
   deleteSelectedTodo,

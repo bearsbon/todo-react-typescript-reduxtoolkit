@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { ITask } from "../Interfaces";
 
 interface Props {
@@ -7,7 +7,8 @@ interface Props {
   deleteTask(id: string): void;
 }
 
-const TodoTask = ({ task, completeTask, deleteTask }: Props) => {
+const TodoTask = memo(function ({ task, completeTask, deleteTask }: Props) {
+  console.log("TodoTask rerender");
   return (
     <div className="task">
       <div className="content">
@@ -28,6 +29,6 @@ const TodoTask = ({ task, completeTask, deleteTask }: Props) => {
       </button>
     </div>
   );
-};
+});
 
 export default TodoTask;

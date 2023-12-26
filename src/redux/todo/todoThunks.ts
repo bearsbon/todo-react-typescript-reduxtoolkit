@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { ITask } from "../Interfaces";
+import { ITask } from "../../Interfaces";
 
 export const fetchAllTodos = createAsyncThunk(
   "todo/fetchAllTodos",
